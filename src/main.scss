@@ -1,0 +1,324 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.login {
+  width: 60vw;
+  .l-button {
+    width: 100%;
+  }
+  form:before {
+    content: "Login";
+    font-weight: bold;
+    font-size: large;
+  }
+  input[type=submit] {
+    margin-left: 2px;
+  }
+  input[type=text] {
+    border: 2px solid #ededed;
+    border-radius: 3px;
+    box-shadow: none !important;
+  }
+  input[type=text]:focus {
+    border: 2px solid #ededed !important;
+  }
+  input[type=password]:focus {
+    border: 2px solid #ededed !important;
+  }
+  input[type=password] {
+    border: 2px solid #ededed;
+    border-radius: 3px;
+    box-shadow: none !important;
+  }
+  form {
+    .error {
+      border: 1px solid red;
+      margin-bottom: -2px !important;
+    }
+    .error-message {
+      font-size: 10px;
+      color: red;
+      text-align: left;
+    }
+    .error-message::first-letter {
+      text-transform: capitalize;
+    }
+  }
+}
+.l-button {
+  cursor: pointer;
+  background-color: rgba(51, 89, 219, 1);
+  border: none;
+  border-radius: 3px;
+  height: 2.5em;
+  color: white;
+  outline: none;
+}
+.l-button:hover {
+  background-color: rgba(51, 89, 219, .5);
+}
+.login-card {
+  min-width: 40vw;
+  max-width: 600px;
+  height: max-content;
+  position: absolute;
+  top: 30vh;
+  left: 25vw;
+  padding: 2em;
+  border: 1px solid #ededed;
+  box-shadow: 5px 5px 5px #aaaaaa;
+  border-radius: 3px;
+}
+.not-visible {
+  display: none;
+}
+
+.staff-table {
+  font-size: 14px;
+  font-family: "DIN Pro";
+  border-collapse: collapse;
+  width: 80%;
+  position: absolute;
+  left: 15em;
+  top: 5em;
+  .right {
+    margin-right: .7em;
+  }
+  .row {
+    background-color: white;
+    border-left: 1px solid rgba(222,222,222,1);
+    border-right: 1px solid rgba(222,222,222,1);
+    cursor: pointer;
+    .table__data {
+      text-transform: capitalize;
+    }
+  }
+  .space {
+    .table__data {
+      padding: 8px;
+    }
+  }
+  td:first-child {
+    padding-left: 1.5em;
+  }
+  td {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    a {
+      color: blue;
+    }
+    button {
+      border: none;
+      background-color: white;
+      cursor: pointer;
+      color: blue;
+    }
+    & i {
+      color: black;
+      border-radius: 50%;
+      &:active {
+        background-color: #eeeeee;
+      }
+    }
+  }
+}
+.paginate {
+  float: right;
+  width: max-content;
+  margin-top: 2em;
+  button {
+    border: none;
+    cursor: pointer;
+    color: blue;
+    background-color: rgba(248,248,248,1);;
+  }
+  .inactive {
+    color: #aaaaaa;
+    pointer-events: none;
+  }
+  .current-page {
+    width: 1000px;
+    height: max-content;
+  }
+}
+.page-header {
+  width: 80vw;
+  text-align: left;
+  position: absolute;
+  left: 10%;
+  top: 8em;
+  button {
+    border: none;
+    cursor: pointer;
+    background-color: rgba(248,248,248,1) !important;
+    &:active {
+      background-color: rgba(248,248,248,1);
+    }
+  }
+}
+.profile {
+  position: absolute;
+  top: 10em;
+  left: 10%;
+  width: 80vw;
+  height: max-content;
+  border: 1px solid rgba(243, 242, 243, 1);;
+  background-color: white;
+  border-radius: 5px;
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .margin {
+    margin: 2em;
+  }
+  .header {
+    text-align: left;
+    font-size: medium;
+    text-transform: capitalize;
+  }
+  .staff-details {
+    display: flex;
+    .column {
+      width: 50%;
+      text-align: left;
+      font-size: small;
+      .x {
+        margin-top: 2em;
+        .detail {
+          width: 50%;
+          min-width: 120px;
+          border: 1px solid blue; // #ccc;
+          padding: .5em;
+          background-color: #fcfcfc;
+          margin-top: .2em;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+}
+
+.material-icons {
+  vertical-align: middle;
+  color: blue;
+}
+.back {
+  color: blue;
+}
+
+@media screen and (max-width: 600px) {
+  .profile {
+    .staff-details {
+      display: block;
+      width: 100%;
+    }
+  }
+  .new-staff {
+    position: inherit;
+    left: .10% !important;
+    width: 100vw !important;
+    .staff-details {
+      display: block !important;
+      width: 100% !important;
+    }
+  }
+}
+
+.first-header {
+  position: absolute;
+  left: 15em;
+  top: 3em;
+  width: 80%;
+  .page-title {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: large;
+    font-family: "DIN Pro";
+  }
+  button {
+    background-color: rgba(248,248,248,1) !important;
+    color: blue;
+    padding: .4em;
+    cursor: pointer;
+    border: 1px solid blue;
+    margin-right: .5em;
+  }
+}
+.new-staff {
+  position: absolute;
+  top: 10em;
+  left: 10%;
+  width: 80vw;
+  height: max-content;
+  border: 1px solid rgba(243, 242, 243, 1);;
+  background-color: white;
+  border-radius: 5px;
+  button {
+    margin-top: 3.8em;
+    background-color: rgba(248,248,248,1) !important;
+    color: grey;
+    padding: .6em;
+    cursor: pointer;
+    border: 1px solid grey;
+    margin-right: .8em;
+    margin-left: 2vw;
+  }
+  hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+  }
+  .margin {
+    margin: 2em;
+  }
+  .header {
+    text-align: left;
+    font-size: medium;
+    text-transform: capitalize;
+  }
+  .staff-details {
+    display: flex;
+    .column {
+      width: 50%;
+      text-align: left;
+      font-size: small;
+      .x {
+        margin-top: 2em;
+        .detail {
+          width: 50%;
+          min-width: 120px;
+          border: 1px solid blue; // #ccc;
+          padding: .5em;
+          background-color: #fcfcfc;
+          margin-top: .2em;
+          text-transform: capitalize;
+        }
+      }
+    }
+  }
+  input {
+    width: 50% !important;
+    border: 1px solid blue !important;
+    height: 2em !important;
+    &:focus {
+      box-shadow: none !important;
+    }
+    &[type=submit] {
+      background-color: blue !important;
+      color: #fcfcfc;
+      max-width: max-content;
+      padding: .6em !important;
+      height: 2.5em !important;
+      text-transform: uppercase;
+    }
+  }
+}
+

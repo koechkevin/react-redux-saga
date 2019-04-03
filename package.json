@@ -3,9 +3,25 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-cypress": "^2.2.1",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-react": "^7.12.4",
+    "history": "^4.9.0",
+    "local-storage": "^1.4.2",
+    "moment": "^2.24.0",
+    "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "2.1.8"
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-saga": "^1.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

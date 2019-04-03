@@ -1,0 +1,34 @@
+import _ from '../../helpers/array';
+
+const initialState = {
+  data: {
+    staff: [],
+    pagination: {
+      count: 13,
+      pageCount: 2,
+      currentPage: 1
+    }
+  },
+};
+export default (state=initialState, action) => {
+  switch (action.type) {
+  case 'FETCH_ALL_STAFF':
+    return {
+      ...state
+    };
+  case 'FETCH_ALL_STAFF_SUCCESS':
+    return {
+      ...state, data: action.data
+    };
+  case 'FETCH_ALL_STAFF_FAILURE':
+    return {
+      ...state
+    };
+  case 'SHUFFLE_SUCCESS':
+    return {
+      ...state, data: { ...state.data, staff: _(state.data.staff, action.currentPosition, action.newPosition)}
+    };
+  default:
+    return state;
+  }
+};
