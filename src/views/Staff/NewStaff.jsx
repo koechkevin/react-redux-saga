@@ -5,7 +5,82 @@ import moment from 'moment';
 import {createStaff} from '../../redux/actions/staffActions';
 import { history } from '../../App';
 
-
+export const Staff = ({
+  data={}, isEditing, details, incomplete, onSubmit, changeDropdown, onChange, content, checkErrors
+}) => {
+  const left = details.filter((each, i) => i%2 === 0);
+  const right = details.filter((each, i) => i%2 !== 0);
+  return (
+    <form onSubmit={onSubmit}>
+      <div className="staff-details">
+        <div className="column">
+          {
+            left.map((each) => (
+              <div className="x" key={each.label}>
+                <span className={each.required?'required':''}>
+                  {each.label}
+                </span>
+                <div>
+                  {
+                    each.type === 'select'?
+                      (
+                        <Dropdown
+                          options={each.options}
+                          onChange={changeDropdown}
+                          value={each.options[0]}
+                          className="select"
+                          name="role"
+                          placeholder="Select an option"
+                        />
+                      )
+                      :(
+                        <span content={content(each.name)} className={checkErrors(each.name)?'input-error':''}>
+                          <input defaultValue={isEditing?data[each.name]:''} onChange={onChange} type={each.type} name={each.name} />
+                        </span>
+                      )
+                  }
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div className="column">
+          {right.map((each) => (
+            <div className="x" key={each.label}>
+              <span className={each.required?'required':''}>
+                {each.label}
+              </span>
+              <div>
+                {
+                  each.type === 'select'? (
+                    <Dropdown
+                      options={each.options}
+                      value={each.options[0]}
+                      className="select"
+                      placeholder="Select an option"
+                      name="role"
+                      onChange={changeDropdown}
+                    />
+                  ):(
+                    <span content={content(each.name)} className={checkErrors(each.name)?'input-error':''}>
+                      <input
+                        defaultValue={isEditing?data[each.name]:''}
+                        onChange={onChange}
+                        type={each.type}
+                        name={each.name} />
+                    </span>
+                  )
+                }
+              </div>
+            </div>
+          ))}
+          <button type="button" onClick={() => history.goBack()}>CANCEL</button>
+          <input className={incomplete?'inactive':''} type="submit" value={isEditing?' Edit ':'Submit'} />
+        </div>
+      </div>
+    </form>
+  );
+};
 class NewStaff extends Component {
   state = {
     id: '', role: '', position: '', idNumber: '', email: '', mobile: '', hireDate:'', name: '', errors: []
@@ -33,7 +108,7 @@ class NewStaff extends Component {
   content = (name) => {
     const {errors} = this.state;
     const contains = errors.filter((e) => e.name === name);
-    return contains.length && contains[0].message||'';
+    return contains.length?contains[0].message:'';
   };
 
   onSubmit = (e) => {
@@ -47,83 +122,6 @@ class NewStaff extends Component {
     e.preventDefault();
     createStaff(data, this.success);
   };
-  newStaff = (details) => {
-    const left = details.filter((each, i) => i%2 === 0);
-    const right = details.filter((each, i) => i%2 !== 0);
-    const index = {
-      'Teacher':1, 'Head-teacher':2, 'Super Admin':3
-    };
-    const {
-      id, role, position, idNumber, mobile, hireDate, name
-    } = this.state;
-    const incomplete = !!(!role||!position||!idNumber||!mobile||!hireDate||!name);
-    return (
-      <form onSubmit={this.onSubmit}>
-        <div className="staff-details">
-          <div className="column">
-            {
-              left.map((each) => (
-                <div className="x" key={each.label}>
-                  <span className={each.required?'required':''}>
-                    {each.label}
-                  </span>
-                  <div>
-                    {
-                      each.type === 'select'?
-                        (
-                          <Dropdown
-                            options={each.options}
-                            onChange={(e)=>this.setState({role: index[e.value]})}
-                            value={each.options[0]}
-                            className="select"
-                            name="role"
-                            placeholder="Select an option"
-                          />
-                        )
-                        :(
-                          <span content={this.content(each.name)} className={this.checkErrors(each.name)?'input-error':''}>
-                            <input onChange={this.onChange} type={each.type} name={each.name} />
-                          </span>
-                        )
-                    }
-                  </div>
-                </div>
-              ))
-            }
-          </div>
-          <div className="column">
-            {right.map((each) => (
-              <div className="x" key={each.label}>
-                <span className={each.required?'required':''}>
-                  {each.label}
-                </span>
-                <div>
-                  {
-                    each.type === 'select'? (
-                      <Dropdown
-                        options={each.options}
-                        value={each.options[0]}
-                        className="select"
-                        placeholder="Select an option"
-                        name="role"
-                        onChange={(e)=>this.setState({role: index[e.value]})}
-                      />
-                    ):(
-                      <span content={this.content(each.name)} className={this.checkErrors(each.name)?'input-error':''}>
-                        <input onChange={this.onChange} type={each.type} name={each.name} />
-                      </span>
-                    )
-                  }
-                </div>
-              </div>
-            ))}
-            <button type="button" onClick={() => history.push('/staff')}>CANCEL</button>
-            <input className={incomplete?'inactive':''} type="submit" />
-          </div>
-        </div>
-      </form>
-    );
-  };
   render() {
     const details = [
       { label: 'Name', name: 'name', type: 'text', required: true},
@@ -136,6 +134,13 @@ class NewStaff extends Component {
         'Teacher', 'Head-teacher', 'Super Admin'
       ], required: true},
     ];
+    const index = {
+      'Teacher':1, 'Head-teacher':2, 'Super Admin':3
+    };
+    const {
+      role, position, idNumber, mobile, hireDate, name
+    } = this.state;
+    const incomplete = !!(!role||!position||!idNumber||!mobile||!hireDate||!name);
     return (
       <div>
         <div className="page-header">
@@ -152,7 +157,16 @@ class NewStaff extends Component {
            ADD A NEW STAFF
             </h5>
             <hr />
-            {this.newStaff(details)}
+            <Staff
+              details={details}
+              onSubmit={this.onSubmit}
+              onChange={this.onChange}
+              content={this.content}
+              checkErrors={this.checkErrors}
+              changeDropdown={(e)=>this.setState({role: index[e.value]})}
+              incomplete={incomplete}
+              isEditing={false}
+            />
           </div>
         </div>
       </div>

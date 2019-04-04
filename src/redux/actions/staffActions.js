@@ -29,3 +29,8 @@ export const createStaffFailure = (errors) => ({
   type: 'CREATE_STAFF_FAIL',
   errors
 });
+
+export const updateStaff = (id, data) => ({
+  type: 'UPDATE_STAFF',
+  id, data
+});

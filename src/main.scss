@@ -196,7 +196,7 @@
           padding: .5em;
           background-color: #fcfcfc;
           margin-top: .2em;
-          text-transform: capitalize;
+          text-transform: lowercase;
         }
       }
     }
@@ -372,5 +372,19 @@
     &:first-letter{
     text-transform: capitalize;
     }
+  }
+}
+
+.edit-button {
+  position: relative;
+  top: 4em;
+  button {
+    background-color: blue;
+    border: none;
+    padding: .4em;
+    width: 4em;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
   }
 }

@@ -1,6 +1,6 @@
 import { all } from 'redux-saga/effects';
 import {watchLogin} from './loginSaga';
-import {watchCreateSaga, watchFetchStaff, watchShuffle} from './staffSaga';
+import {watchCreateSaga, watchFetchStaff, watchShuffle, watchUpdateStaffSaga} from './staffSaga';
 
 export const baseUrl = 'http://localhost:5000/api/v1';
 function* saga() {
@@ -8,7 +8,8 @@ function* saga() {
     watchLogin(),
     watchFetchStaff(),
     watchShuffle(),
-    watchCreateSaga()
+    watchCreateSaga(),
+    watchUpdateStaffSaga()
   ]);
 }
 

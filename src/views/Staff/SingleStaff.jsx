@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import momemt from 'moment';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import {fetchAllStaff} from '../../redux/actions/staffActions';
 import { history} from '../../App';
@@ -10,17 +10,17 @@ class Employee extends Component {
     match: PropTypes.object.isRequired,
     staff: PropTypes.array.isRequired,
     fetchAllStaff: PropTypes.func.isRequired,
-    location: PropTypes.object.isRequired,
   };
 
   componentDidMount() {
-    const {fetchAllStaff, match, location: { search }} = this.props;
+    const {fetchAllStaff, match} = this.props;
     fetchAllStaff(`?idNumber=${match.params.idNumber}`, () => null);
   }
 
   renderDetail = (details) => {
     const left = details.filter((each, i) => i%2 === 0);
     const right = details.filter((each, i) => i%2 !== 0);
+    const {match: {params: {idNumber}}} = this.props;
     return (
       <div className="staff-details">
         <div className="column">
@@ -46,6 +46,9 @@ class Employee extends Component {
               </div>
             ))
           }
+          <a className="edit-button" href={`/staff/${idNumber}/update`}>
+            <button type="button">Edit</button>
+          </a>
         </div>
       </div>
     );
@@ -59,7 +62,7 @@ class Employee extends Component {
       {label: 'Employee Number', value: employee&&employee.staff.id},
       {label: 'Mobile Number', value: employee&&employee.staff.mobile},
       {label: 'Position', value: employee&&employee.staff.position},
-      {label: 'Hire Date', value: employee&&momemt(employee.staff.hireDate).format('DD-MM-YYYY')},
+      {label: 'Hire Date', value: employee&&moment(employee.staff.hireDate).format('DD-MM-YYYY')},
       {label: 'Roles Assigned', value: employee&&employee.role.roleName},
       {label: 'Email', value: employee?employee.staff.email||'Not Provided':' '}
     ];
