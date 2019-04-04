@@ -19,3 +19,13 @@ export const shuffleSuccess = ({ currentPosition, newPosition }) => ({
   type: 'SHUFFLE_SUCCESS',
   currentPosition, newPosition
 });
+
+export const createStaff = (data, success) => ({
+  type: 'CREATE_STAFF',
+  data, success
+});
+
+export const createStaffFailure = (errors) => ({
+  type: 'CREATE_STAFF_FAIL',
+  errors
+});

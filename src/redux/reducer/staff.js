@@ -9,6 +9,7 @@ const initialState = {
       currentPage: 1
     }
   },
+  errors: []
 };
 export default (state=initialState, action) => {
   switch (action.type) {
@@ -27,6 +28,10 @@ export default (state=initialState, action) => {
   case 'SHUFFLE_SUCCESS':
     return {
       ...state, data: { ...state.data, staff: _(state.data.staff, action.currentPosition, action.newPosition)}
+    };
+  case 'CREATE_STAFF_FAIL':
+    return {
+      ...state, errors: action.errors
     };
   default:
     return state;

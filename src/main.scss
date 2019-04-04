@@ -267,6 +267,7 @@
     border: 1px solid grey;
     margin-right: .8em;
     margin-left: 2vw;
+    border-radius: 5px;
   }
   hr {
     display: block;
@@ -282,7 +283,12 @@
   .header {
     text-align: left;
     font-size: medium;
-    text-transform: capitalize;
+    &::after {
+      content: '* Field is required';
+      color: red;
+      font-size: 10px;
+      float: right;
+    }
   }
   .staff-details {
     display: flex;
@@ -308,8 +314,10 @@
     width: 50% !important;
     border: 1px solid blue !important;
     height: 2em !important;
+    font-size: small !important;
     &:focus {
       box-shadow: none !important;
+      background-color: #fcfcfc;
     }
     &[type=submit] {
       background-color: blue !important;
@@ -318,7 +326,51 @@
       padding: .6em !important;
       height: 2.5em !important;
       text-transform: uppercase;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+      &.inactive {
+        pointer-events: none;
+        background-color: white !important;
+        color: #282c34;
+        border-color: grey !important;
+      }
     }
   }
 }
-
+.required {
+  &::after {
+    content: '*';
+    color: red;
+  }
+}
+.Dropdown-control {
+  width: 50%;
+  padding: .4em;
+  border: 1px solid blue;
+  cursor: pointer;
+}
+.Dropdown-menu {
+  z-index: 2;
+  width: 40%;
+  margin-left: 10px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.input-error {
+  input{
+  border: 1px solid red !important;
+  }
+  &::after{
+    display: block;
+    content: attr(content);
+    color: red;
+    font-size: 10px;
+    margin-top: -6px;
+    width: 50%;
+    &:first-letter{
+    text-transform: capitalize;
+    }
+  }
+}
