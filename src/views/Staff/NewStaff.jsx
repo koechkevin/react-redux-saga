@@ -137,13 +137,23 @@ class NewStaff extends Component {
       ], required: true},
     ];
     return (
-      <div className="new-staff">
-        <div className="margin">
-          <h5 className="header">
+      <div>
+        <div className="page-header">
+          <button type="button" onClick={() => history.go(-1)}>
+            <i className="material-icons">
+              arrow_back
+            </i>
+            <span className="back">Back</span>
+          </button>
+        </div>
+        <div className="new-staff">
+          <div className="margin">
+            <h5 className="header">
            ADD A NEW STAFF
-          </h5>
-          <hr />
-          {this.newStaff(details)}
+            </h5>
+            <hr />
+            {this.newStaff(details)}
+          </div>
         </div>
       </div>
     );
