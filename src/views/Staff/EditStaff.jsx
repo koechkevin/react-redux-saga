@@ -3,21 +3,10 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import {history} from '../../App';
 import {Staff} from './NewStaff';
-import {fetchAllStaff, updateStaff} from '../../redux/actions/staffActions';
+import {createStaff, fetchAllStaff, getRoles, updateStaff} from '../../redux/actions/staffActions';
 
 class EditStaff extends Component {
   state={ errors:[]};
-  details = [
-    { label: 'Name', name: 'name', type: 'text', required: true},
-    { label: 'Id Number', name: 'idNumber', type: 'text', required: true},
-    { label: 'Mobile Number', name: 'mobile', type: 'number', required: true},
-    { label: 'Position', name: 'position', type: 'text', required: true},
-    { label: 'Email Address', name: 'email', type: 'email'},
-    { label: 'Hire Date', name: 'hireDate', type: 'date', required: true},
-    { label: 'Assign Role', name: 'role', type: 'select', options: [
-      'Teacher', 'Head-teacher', 'Super Admin'
-    ], required: true},
-  ];
   checkErrors = (name) => {
     const {errors} = this.state;
     const contains = errors.filter((e) => e.name === name);
@@ -39,15 +28,30 @@ class EditStaff extends Component {
     updateStaff(idNumber, this.state);
   };
   componentDidMount = () => {
-    const {fetchAllStaff, match} = this.props;
+    const {fetchAllStaff, match, getRoles} = this.props;
     fetchAllStaff(`?idNumber=${match.params.idNumber}`, () => null);
+    getRoles();
   };
   render() {
-    const { staff } = this.props;
+    const { staff, roles } = this.props;
+    const options = roles.map((each) => each.roleName);
+    let index = {};
+    roles.forEach((e) => {
+      index[e.roleName] = e.id;
+    });
+    const details = [
+      { label: 'Name', name: 'name', type: 'text', required: true},
+      { label: 'Id Number', name: 'idNumber', type: 'text', required: true},
+      { label: 'Mobile Number', name: 'mobile', type: 'number', required: true},
+      { label: 'Position', name: 'position', type: 'text', required: true},
+      { label: 'Email Address', name: 'email', type: 'email'},
+      { label: 'Hire Date', name: 'hireDate', type: 'date', required: true},
+      { label: 'Assign Role', name: 'role', type: 'select', options, required: true},
+    ];
     const {
       role, position, idNumber, mobile, hireDate, name, email
     } = this.state;
-    const incomplete = !!(!role&&!position&&!idNumber&&!mobile&&!hireDate&&!name&&!email);
+    const incomplete = !!(!position&&!idNumber&&!mobile&&!hireDate&&!name&&!email);
     return(
       <div>
         {!staff.length?<span>Loading</span>:(
@@ -67,19 +71,21 @@ class EditStaff extends Component {
                 </h5>
                 <hr />
                 <Staff
-                  details={this.details}
+                  details={details}
                   content={this.content}
                   checkErrors={this.checkErrors}
                   isEditing
                   incomplete={incomplete}
                   onChange={this.onChange}
                   onSubmit={this.onSubmit}
+                  changeDropdown={(e)=>this.setState({role: index[e.value]})}
                   data={{
                     idNumber: staff[0].staff.idNumber,
                     mobile: staff[0].staff.mobile,
                     name: staff[0].staff.name,
                     position: staff[0].staff.position,
                     email: staff[0].staff.email,
+                    role: staff[0]&&staff[0].roleId,
                     hireDate: moment(staff[0].staff.hireDate).format('YYYY-MM-DD')
                   }}
                 />
@@ -92,8 +98,8 @@ class EditStaff extends Component {
   }
 }
 
-const mapStateToProps = ({ staff: { data: {staff}}}) => ({
-  staff
+const mapStateToProps = ({ staff: { roles, data: {staff}}}) => ({
+  staff, roles
 });
 
-export default connect(mapStateToProps, { fetchAllStaff, updateStaff })(EditStaff);
+export default connect(mapStateToProps, { fetchAllStaff, updateStaff, getRoles })(EditStaff);

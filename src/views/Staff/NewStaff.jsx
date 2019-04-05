@@ -2,7 +2,7 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import moment from 'moment';
-import {createStaff} from '../../redux/actions/staffActions';
+import {createStaff, getRoles} from '../../redux/actions/staffActions';
 import { history } from '../../App';
 
 export const Staff = ({
@@ -27,10 +27,11 @@ export const Staff = ({
                         <Dropdown
                           options={each.options}
                           onChange={changeDropdown}
-                          value={each.options[0]}
+                          value={each.options[isEditing?data[each.role]:0]}
                           className="select"
                           name="role"
                           placeholder="Select an option"
+                          disabled={!!isEditing}
                         />
                       )
                       :(
@@ -95,6 +96,11 @@ class NewStaff extends Component {
     history.push('/staff');
   };
 
+  componentDidMount = () => {
+    const { getRoles } = this.props;
+    getRoles();
+  };
+
   componentWillReceiveProps = (nextProps, nextContext) => {
     this.setState({ errors: nextProps.errors });
   };
@@ -123,6 +129,8 @@ class NewStaff extends Component {
     createStaff(data, this.success);
   };
   render() {
+    const { roles } = this.props;
+    const options = roles.map((each) => each.roleName);
     const details = [
       { label: 'Name', name: 'name', type: 'text', required: true},
       { label: 'Id Number', name: 'idNumber', type: 'text', required: true},
@@ -130,13 +138,13 @@ class NewStaff extends Component {
       { label: 'Position', name: 'position', type: 'text', required: true},
       { label: 'Email Address', name: 'email', type: 'email'},
       { label: 'Hire Date', name: 'hireDate', type: 'date', required: true},
-      { label: 'Assign Role', name: 'role', type: 'select', options: [
-        'Teacher', 'Head-teacher', 'Super Admin'
-      ], required: true},
+      { label: 'Assign Role', name: 'role', type: 'select', options, required: true},
     ];
-    const index = {
-      'Teacher':1, 'Head-teacher':2, 'Super Admin':3
-    };
+
+    let index = {};
+    roles.forEach((e) => {
+      index[e.roleName] = e.id;
+    });
     const {
       role, position, idNumber, mobile, hireDate, name
     } = this.state;
@@ -174,8 +182,8 @@ class NewStaff extends Component {
   }
 }
 
-const stateToProps = ({ staff: { errors }}) => ({
-  errors
+const stateToProps = ({ staff: { errors, roles }}) => ({
+  errors, roles
 });
 
-export default connect(stateToProps, { createStaff })(NewStaff);
+export default connect(stateToProps, { createStaff, getRoles })(NewStaff);

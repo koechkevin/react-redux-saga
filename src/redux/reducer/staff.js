@@ -9,7 +9,8 @@ const initialState = {
       currentPage: 1
     }
   },
-  errors: []
+  errors: [],
+  roles: []
 };
 export default (state=initialState, action) => {
   switch (action.type) {
@@ -32,6 +33,10 @@ export default (state=initialState, action) => {
   case 'CREATE_STAFF_FAIL':
     return {
       ...state, errors: action.errors
+    };
+  case 'GET_ROLES_SUCCESS':
+    return {
+      ...state, roles: action.data.roles
     };
   default:
     return state;

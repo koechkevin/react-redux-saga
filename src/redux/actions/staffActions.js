@@ -34,3 +34,12 @@ export const updateStaff = (id, data) => ({
   type: 'UPDATE_STAFF',
   id, data
 });
+
+export const getRoles = () => ({
+  type: 'GET_ROLES'
+});
+
+export const getRolesSuccess = (data) => ({
+  type: 'GET_ROLES_SUCCESS',
+  data
+});
