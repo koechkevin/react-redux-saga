@@ -38,6 +38,14 @@ export default (state=initialState, action) => {
     return {
       ...state, roles: action.data.roles
     };
+  case 'DELETE_STAFF_SUCCESS':
+    return {
+      ...state, data:
+        {
+          ...state.data,
+          staff: state.data.staff.filter((e) => e.staff.idNumber !== action.id)
+        }
+    };
   default:
     return state;
   }

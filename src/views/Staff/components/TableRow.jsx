@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import moment from 'moment/moment';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
+import del from '../../../assets/images/delete.svg';
 
 class TableRow extends Component {
 
@@ -42,6 +44,18 @@ class TableRow extends Component {
     this.setState({newPosition: e.target.id});
   };
   dragStart = (e) => e.dataTransfer.setData('initialPosition', e.target.id);
+  onDelete = () => {
+    const { deleteStaff, idNumber, location: { search } } = this.props;
+    swal({
+      title: 'Delete?',
+      text: 'Are you sure you want to delete?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+    }).then(() => {
+      deleteStaff(idNumber, search);
+    });
+  };
 
   render() {
     const {idNumber, name, position, hireDate, id} = this.props;
@@ -74,10 +88,8 @@ class TableRow extends Component {
             {moment(hireDate).format('DD-MM-YYYY')}
           </td>
           <td className="mdl-data-table__cell--non-numeric table__data right">
-            <button type="button">
-              <i className="material-icons tiny">
-                more_vert
-              </i>
+            <button type="button" onClick={this.onDelete}>
+              <img className="tiny" src={del} alt="delete" />
             </button>
           </td>
         </tr>

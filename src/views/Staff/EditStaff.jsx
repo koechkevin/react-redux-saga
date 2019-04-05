@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import {history} from '../../App';
 import {Staff} from './NewStaff';
-import {createStaff, fetchAllStaff, getRoles, updateStaff} from '../../redux/actions/staffActions';
+import { fetchAllStaff, getRoles, updateStaff} from '../../redux/actions/staffActions';
 
 class EditStaff extends Component {
   state={ errors:[]};
@@ -49,7 +49,7 @@ class EditStaff extends Component {
       { label: 'Assign Role', name: 'role', type: 'select', options, required: true},
     ];
     const {
-      role, position, idNumber, mobile, hireDate, name, email
+      position, idNumber, mobile, hireDate, name, email
     } = this.state;
     const incomplete = !!(!position&&!idNumber&&!mobile&&!hireDate&&!name&&!email);
     return(

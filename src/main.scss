@@ -88,7 +88,7 @@
     background-color: white;
     border-left: 1px solid rgba(222,222,222,1);
     border-right: 1px solid rgba(222,222,222,1);
-    cursor: pointer;
+    cursor: move;
     .table__data {
       text-transform: capitalize;
     }
@@ -113,12 +113,10 @@
       cursor: pointer;
       color: blue;
     }
-    & i {
-      color: black;
-      border-radius: 50%;
-      &:active {
-        background-color: #eeeeee;
-      }
+    & img {
+      height: 15px;
+      width: 13px;
+      vertical-align: middle;
     }
   }
 }
@@ -387,4 +385,17 @@
     color: white;
     cursor: pointer;
   }
+}
+
+button.swal-button.swal-button--cancel {
+  background-color: blue !important;
+  color: #fcfcfc;
+  font-family: "DIN Pro";
+  text-transform: uppercase;
+  outline: none;
+}
+
+div.swal-icon.swal-icon--warning {
+  color: red;
+  border-color: red;
 }

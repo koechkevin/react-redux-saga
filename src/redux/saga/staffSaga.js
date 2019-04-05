@@ -4,7 +4,13 @@ import swal from 'sweetalert';
 import { takeLatest, call, put, takeEvery } from 'redux-saga/effects';
 import {baseUrl} from './index';
 import errorHandler from '../../helpers/errorHandler';
-import {createStaffFailure, fetchAllStaffSuccess, getRolesSuccess, shuffleSuccess} from '../actions/staffActions';
+import {
+  createStaffFailure,
+  deleteStaffSuccess, fetchAllStaff,
+  fetchAllStaffSuccess,
+  getRolesSuccess,
+  shuffleSuccess
+} from '../actions/staffActions';
 import { history} from '../../App';
 
 const config = {
@@ -16,6 +22,7 @@ const api = (url) => axios.get(`${baseUrl}/users/staff${url}`, config);
 const createAPI = (data) => axios.post(`${baseUrl}/users/staff/create`, data, config);
 const updateAPI = (id, data) => axios.put(`${baseUrl}/users/staff/${id}/update`, data, config);
 const rolesAPI = () => axios.get(`${baseUrl}/users/roles`, config);
+const deleteStaffAPI = (id) => axios.delete(`${baseUrl}/users/staff/${id}/delete`, config);
 
 export function* watchFetchStaff() {
   yield takeLatest('FETCH_ALL_STAFF', fetchAllStaffSaga);
@@ -92,4 +99,18 @@ export function* fetchRoles() {
 
 export function* watchFetchRoles() {
   yield takeEvery('GET_ROLES', fetchRoles);
+}
+
+export function* watchDeleteStaff() {
+  yield takeLatest('DELETE_STAFF', deleteStaff);
+}
+
+export function* deleteStaff(action) {
+  try {
+    yield call(deleteStaffAPI, action.id);
+    // yield put(deleteStaffSuccess(action.id));
+    yield put(fetchAllStaff(action.url,()=>null));
+  } catch (error) {
+    console.log(error);
+  }
 }

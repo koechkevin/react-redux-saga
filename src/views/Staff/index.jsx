@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import {fetchAllStaff, handleShuffle} from '../../redux/actions/staffActions';
+import {deleteStaff, fetchAllStaff, handleShuffle} from '../../redux/actions/staffActions';
 import Table from './components/StaffTable';
 import HigherOrderComponent from '../../HOC/Authenticate';
 import PageHeader from './components/PageHeader';
@@ -13,6 +13,7 @@ class Staff extends Component {
     data: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
     handleShuffle: PropTypes.func.isRequired,
+    deleteStaff: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -26,7 +27,7 @@ class Staff extends Component {
   };
 
   render(){
-    const { data: { staff, pagination }, location, fetchAllStaff, handleShuffle} = this.props;
+    const { data: { staff, pagination }, location, fetchAllStaff, handleShuffle, deleteStaff, match } = this.props;
     return (
       <div>
         <PageHeader buttonValue="ADD STAFF" onClick={this.onClickButton} heading="all staff" />
@@ -36,6 +37,8 @@ class Staff extends Component {
           location={location}
           pagination={pagination}
           handleShuffle={handleShuffle}
+          deleteStaff={deleteStaff}
+          match={match}
         />
       </div>
     );
@@ -45,4 +48,5 @@ class Staff extends Component {
 const mapStateToProps = ({ staff }) => ({
   data: staff.data
 });
-export default connect(mapStateToProps, { fetchAllStaff, handleShuffle })(Staff);
+
+export default connect(mapStateToProps, { fetchAllStaff, handleShuffle, deleteStaff })(Staff);

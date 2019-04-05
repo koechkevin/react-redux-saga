@@ -43,3 +43,13 @@ export const getRolesSuccess = (data) => ({
   type: 'GET_ROLES_SUCCESS',
   data
 });
+
+export const deleteStaff = (id, url) => ({
+  type: 'DELETE_STAFF',
+  id, url
+});
+
+// export const deleteStaffSuccess = (id) => ({
+//   type: 'DELETE_STAFF_SUCCESS',
+//   id
+// });

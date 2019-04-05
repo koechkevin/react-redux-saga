@@ -22,7 +22,7 @@ const TableHead = () => (
   </thead>
 );
 
-const TableBody = ({ staff, handleShuffle }) => {
+const TableBody = ({ staff, handleShuffle, deleteStaff, match, location }) => {
   return (
     <tbody>
       {
@@ -36,6 +36,9 @@ const TableBody = ({ staff, handleShuffle }) => {
               position={each.staff.position}
               hireDate={each.staff.hireDate}
               handleShuffle={handleShuffle}
+              deleteStaff={deleteStaff}
+              match={match}
+              location={location}
             />
           );
         }
@@ -74,11 +77,12 @@ class Paginate extends Component {
     );
   }
 }
-const Table =({ staff, location, pagination, fetchAllStaff, handleShuffle } ) =>(
+const Table =({ staff, location, pagination, fetchAllStaff, handleShuffle, deleteStaff, match} ) =>(
   <div className="staff-table">
     <table>
       <TableHead />
-      <TableBody staff={staff} handleShuffle={handleShuffle} />
+      <TableBody
+        staff={staff} handleShuffle={handleShuffle} deleteStaff={deleteStaff} location={location} match={match} />
     </table>
     <Paginate pagination={pagination} location={location} fetchAllStaff={fetchAllStaff} />
   </div>
