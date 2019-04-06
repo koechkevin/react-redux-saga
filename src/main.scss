@@ -230,8 +230,9 @@
 .first-header {
   position: absolute;
   left: 15em;
-  top: 3em;
+  top: 5em;
   width: 80%;
+  z-index: 1;
   .page-title {
     text-transform: uppercase;
     font-weight: bold;
@@ -398,4 +399,84 @@ button.swal-button.swal-button--cancel {
 div.swal-icon.swal-icon--warning {
   color: red;
   border-color: red;
+}
+
+button.swal-button.swal-button--confirm {
+  background-color: blue;
+  font-family: "DIN Pro";
+}
+.nav-bar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 4em;
+  background-color: white;
+  z-index: 2;
+  border-bottom: 1px solid #d4d4d4;
+
+  .search {
+    position: relative;
+    background-color: #fafafa;;
+    height: max-content;
+    padding: .5em;
+    top: 30%;
+    border-radius: 18px;
+    input[type=text] {
+      border-bottom: none;
+      width: 30% !important;
+      font-size: small;
+      &:focus {
+        border-bottom: none;
+        box-shadow: none;
+      }
+    }
+  }
+  .drop-down {
+    background-color: white; // #fcfcfc;
+    position: relative;
+    top: 10%;
+    border: none;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    padding-left: 4px;
+    margin-left: .8em;
+    &:hover {
+      background-color: #aaaaaa;
+    }
+    .material-icons {
+      padding-left: -10px !important;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+  .material-icons {
+    color: grey;
+    position: relative;
+    vertical-align: middle;
+  }
+  img {
+    position: relative;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin-left: 2em;
+    top: 20%;
+  }
+  .avatar::after {
+    content: "Kevin Koech";
+    margin-left: 1em;
+    position: relative;
+  }
+}
+
+.nav-icons {
+  position: relative;
+  float: right;
+  margin-right: 4em;
+  height: 100%;
+}
+table {
+  margin-top: 2em;
 }

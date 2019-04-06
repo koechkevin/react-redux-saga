@@ -82,7 +82,7 @@ class Employee extends Component {
               {employee&&employee.staff.name}
             </h5>
             <hr />
-            {this.renderDetail(details)}
+            {employee&&this.renderDetail(details)}
           </div>
         </div>
       </div>
