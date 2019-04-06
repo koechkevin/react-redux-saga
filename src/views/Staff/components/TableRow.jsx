@@ -10,9 +10,11 @@ class TableRow extends Component {
     id: PropTypes.number.isRequired,
     idNumber: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    position: PropTypes.string.isRequired,
+    role: PropTypes.string.isRequired,
     hireDate: PropTypes.string.isRequired,
     handleShuffle: PropTypes.func.isRequired,
+    deleteStaff: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired
   };
 
   componentDidMount = () => {
@@ -52,13 +54,13 @@ class TableRow extends Component {
       icon: 'warning',
       buttons: true,
       dangerMode: true,
-    }).then(() => {
-      deleteStaff(idNumber, search);
+    }).then((deleted) => {
+      if (deleted) deleteStaff(idNumber, search);
     });
   };
 
   render() {
-    const {idNumber, name, position, hireDate, id} = this.props;
+    const {idNumber, name, role, hireDate, id} = this.props;
     return (
       <>
         <tr className="space">
@@ -82,7 +84,7 @@ class TableRow extends Component {
             {name}
           </td>
           <td className="mdl-data-table__cell--non-numeric table__data">
-            {position}
+            {role}
           </td>
           <td className="mdl-data-table__cell--non-numeric table__data">
             {moment(hireDate).format('DD-MM-YYYY')}

@@ -18,6 +18,11 @@ export default (state=initialState, action) => {
     return {
       ...state, isLoggedIn: false, errors: action.errors, roles: []
     };
+  case 'authentication_failed':
+    localStorage.clear();
+    return {
+      ...state, isLoggedIn: false
+    };
   default:
     return state;
   }

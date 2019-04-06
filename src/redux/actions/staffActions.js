@@ -6,10 +6,6 @@ export const fetchAllStaffSuccess = (data) => ({
   type: 'FETCH_ALL_STAFF_SUCCESS',
   data
 });
-export const fetchAllStaffFailure = () => ({
-  type: 'FETCH_ALL_STAFF_FAILURE'
-});
-
 export const handleShuffle = ({ currentPosition, newPosition }) => ({
   type: 'SHUFFLE',
   currentPosition, newPosition
@@ -48,8 +44,3 @@ export const deleteStaff = (id, url) => ({
   type: 'DELETE_STAFF',
   id, url
 });
-
-// export const deleteStaffSuccess = (id) => ({
-//   type: 'DELETE_STAFF_SUCCESS',
-//   id
-// });

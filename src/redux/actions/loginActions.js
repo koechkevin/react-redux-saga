@@ -12,3 +12,7 @@ export const loginFailure = (errors) => ({
   type: 'LOGIN_FAILURE',
   errors
 });
+
+export const authenticationFailed = () => ({
+  type: 'authentication_failed'
+});

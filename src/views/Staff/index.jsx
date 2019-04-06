@@ -30,7 +30,7 @@ class Staff extends Component {
     const { data: { staff, pagination }, location, fetchAllStaff, handleShuffle, deleteStaff, match } = this.props;
     return (
       <div>
-        <PageHeader buttonValue="ADD STAFF" onClick={this.onClickButton} heading="all staff" />
+        <PageHeader buttonValue="ADD STAFF" onClick={this.onClickButton} heading="all assigned roles" />
         <Table
           fetchAllStaff={fetchAllStaff}
           staff={staff}

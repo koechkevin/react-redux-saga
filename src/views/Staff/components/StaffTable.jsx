@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import {history} from '../../../App';
 import TableRow from './TableRow';
 
@@ -12,7 +13,7 @@ const TableHead = () => (
         Name
       </th>
       <th className="mdl-data-table__cell--non-numeric table__head">
-        Position
+        Role
       </th>
       <th className="mdl-data-table__cell--non-numeric table__head">
         Hire Date
@@ -30,10 +31,10 @@ const TableBody = ({ staff, handleShuffle, deleteStaff, match, location }) => {
           return(
             <TableRow
               id={i}
-              key={each.staff.id}
+              key={each.id}
               idNumber={each.staff.idNumber}
               name={each.staff.name}
-              position={each.staff.position}
+              role={each.role['roleName']}
               hireDate={each.staff.hireDate}
               handleShuffle={handleShuffle}
               deleteStaff={deleteStaff}
@@ -49,6 +50,10 @@ const TableBody = ({ staff, handleShuffle, deleteStaff, match, location }) => {
 };
 
 class Paginate extends Component {
+  static propTypes = {
+    pagination: PropTypes.object.isRequired,
+    fetchAllStaff: PropTypes.func.isRequired
+  };
   onPageChange = (e) => {
     const { pagination: { currentPage }, fetchAllStaff } = this.props;
     history.push(`/staff?page=${e.target.name === 'previous'?currentPage-1:currentPage+1}`);
@@ -87,5 +92,21 @@ const Table =({ staff, location, pagination, fetchAllStaff, handleShuffle, delet
     <Paginate pagination={pagination} location={location} fetchAllStaff={fetchAllStaff} />
   </div>
 );
+
+const props = {
+  staff: 'string', location: 'object',
+  pagination: 'object', fetchAllStaff: 'func',
+  handleShuffle: 'func', deleteStaff: 'func', match: 'object'
+};
+
+TableBody.propTypes = () => {};
+
+Table.propTypes = () => {
+  let output = {};
+  Object.keys(props).forEach((e) => {
+    output[e] = PropTypes[props[e]].isRequired;
+  });
+  return output;
+};
 
 export default Table;
