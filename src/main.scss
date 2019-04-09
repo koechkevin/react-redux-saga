@@ -253,7 +253,7 @@
   top: 10em;
   left: 10%;
   width: 80vw;
-  height: max-content;
+  min-height: max-content;
   border: 1px solid rgba(243, 242, 243, 1);;
   background-color: white;
   border-radius: 5px;
@@ -479,4 +479,8 @@ button.swal-button.swal-button--confirm {
 }
 table {
   margin-top: 2em;
+}
+
+div.Dropdown {
+
 }

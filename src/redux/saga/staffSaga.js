@@ -8,7 +8,7 @@ import {
   getRolesSuccess,
   shuffleSuccess
 } from '../actions/staffActions';
-import { history} from '../../App';
+import { history} from '../../views/App';
 import axios from '../../helpers/axios';
 import {authenticationFailed} from '../actions/loginActions';
 

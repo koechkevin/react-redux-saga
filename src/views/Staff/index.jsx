@@ -5,7 +5,7 @@ import {deleteStaff, fetchAllStaff, handleShuffle} from '../../redux/actions/sta
 import Table from './components/StaffTable';
 import HigherOrderComponent from '../../HOC/Authenticate';
 import PageHeader from './components/PageHeader';
-import { history} from '../../App';
+import { history} from '../App';
 
 class Staff extends Component {
   static propTypes = {

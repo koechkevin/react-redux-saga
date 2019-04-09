@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import {history} from '../../App';
+import {history} from '../App';
 import {Staff} from './NewStaff';
 import { fetchAllStaff, getRoles, updateStaff} from '../../redux/actions/staffActions';
 
@@ -86,7 +86,7 @@ class EditStaff extends Component {
                     position: staff[0].staff.position,
                     email: staff[0].staff.email,
                     role: staff[0]&&staff[0].roleId,
-                    hireDate: moment(staff[0].staff.hireDate).format('YYYY-MM-DD')
+                    hireDate: moment(staff[0].staff.hireDate, 'YYYY-MM-DD').format('YYYY-MM-DD')
                   }}
                 />
               </div>

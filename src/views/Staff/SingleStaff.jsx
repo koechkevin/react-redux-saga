@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import {fetchAllStaff} from '../../redux/actions/staffActions';
-import { history} from '../../App';
+import { history } from '../App';
 
 class Employee extends Component {
   static propTypes = {
@@ -62,7 +62,7 @@ class Employee extends Component {
       {label: 'Employee Number', value: employee&&employee.staff.id},
       {label: 'Mobile Number', value: employee&&employee.staff.mobile},
       {label: 'Position', value: employee&&employee.staff.position},
-      {label: 'Hire Date', value: employee&&moment(employee.staff.hireDate).format('DD-MM-YYYY')},
+      {label: 'Hire Date', value: employee&&moment(employee.staff.hireDate, 'DD-MM-YYYY').format('DD-MM-YYYY')},
       {label: 'Roles Assigned', value: employee&&employee.role.roleName},
       {label: 'Email', value: employee?employee.staff.email||'Not Provided':' '}
     ];

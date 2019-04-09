@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { history} from '../../App';
+import { history} from '../App';
 
 class NavBar extends Component {
-
+  static propTypes = () => {};
   onChange = (e) => {
-    const { location: {pathname }, children} = this.props;
+    const { location: {pathname }} = this.props;
     history.push(`${pathname}?search=${e.target.value}`);
-    return (
-      <children key={children} />
-    );
   };
   render() {
     const { children } = this.props;
@@ -16,7 +13,7 @@ class NavBar extends Component {
       <div>
         <div className="nav-bar">
           <span className="search">
-            <input type="text" placeholder="Search staff or Id" onChange={this.onChange} />
+            <input type="text" onSubmit={() => this.forceUpdate()} placeholder="Search staff or Id" onChange={this.onChange} />
           </span>
           <span className="nav-icons">
             <i className="material-icons">

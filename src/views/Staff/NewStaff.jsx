@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Dropdown from 'react-dropdown';
 import moment from 'moment';
 import {createStaff, getRoles} from '../../redux/actions/staffActions';
-import { history } from '../../App';
+import { history } from '../App';
 
 export const Staff = ({
   data={}, isEditing, details, incomplete, onSubmit, changeDropdown, onChange, content, checkErrors
@@ -86,12 +86,13 @@ class NewStaff extends Component {
   state = {
     id: '', role: '', position: '', idNumber: '', email: '', mobile: '', hireDate:'', name: '', errors: []
   };
+  static propTypes = () => {};
+
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
     });
   };
-
   success = () => {
     history.push('/staff');
   };
@@ -181,7 +182,7 @@ class NewStaff extends Component {
     );
   }
 }
-
+Staff.propTypes = () => {};
 const stateToProps = ({ staff: { errors, roles }}) => ({
   errors, roles
 });

@@ -87,7 +87,7 @@ class TableRow extends Component {
             {role}
           </td>
           <td className="mdl-data-table__cell--non-numeric table__data">
-            {moment(hireDate).format('DD-MM-YYYY')}
+            {moment(hireDate, 'YYYY-MM-DD').format('DD-MM-YYYY')}
           </td>
           <td className="mdl-data-table__cell--non-numeric table__data right">
             <button type="button" onClick={this.onDelete}>
