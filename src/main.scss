@@ -462,7 +462,7 @@ button.swal-button.swal-button--confirm {
     height: 40px;
     width: 40px;
     margin-left: 2em;
-    top: 20%;
+    top: 20% !important;
   }
   .avatar::after {
     content: "Kevin Koech";
@@ -483,4 +483,29 @@ table {
 
 div.Dropdown {
 
+}
+.close {
+  display: none;
+}
+.menu-options {
+  .options {
+    z-index: 2;
+    position: relative;
+    top: 4.2em;
+    background-color: white;
+    border: 1px solid #dedede;
+    width: 8em;
+    margin-right: 1em;
+    float: right;
+    margin-top: -2px;
+    padding: .8em .8em .8em .5em;
+    button {
+      background-color: white;
+      margin: 10px 1px 1px 10px;
+      border: none;
+      cursor: pointer;
+      color: blue;
+      text-transform: uppercase;
+    }
+  }
 }
