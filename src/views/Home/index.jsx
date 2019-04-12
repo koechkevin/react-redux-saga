@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import '../../main.scss';
+import localStorage from 'local-storage';
 import {login} from '../../redux/actions/loginActions';
 
 export const Login = ({errors, onSubmit, onChange}) => {
@@ -59,7 +60,8 @@ class Home extends Component {
     </div>
   );
   render() {
-    const { login: { isLoggedIn, errors } } = this.props;
+    const { login: { errors, isLoggedIn: logged } } = this.props;
+    const isLoggedIn = logged || (!!localStorage.get('jwt_token') && !!localStorage.get('roles'));
     return(
       <div>
         {

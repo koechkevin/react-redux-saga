@@ -9,7 +9,9 @@ const initialState = {
 export default (state=initialState, action) => {
   switch(action.type){
   case 'LOGIN':
-    return state;
+    return {
+      ...state, isLoggedIn: false, roles: []
+    };
   case 'LOGIN_SUCCESSFUL':
     return {
       ...state, isLoggedIn: true, roles: action.roles
@@ -22,6 +24,11 @@ export default (state=initialState, action) => {
     localStorage.clear();
     return {
       ...state, isLoggedIn: false
+    };
+  case 'LOGOUT':
+    localStorage.clear();
+    return  {
+      isLoggedIn: false, errors: [], roles: []
     };
   default:
     return state;
