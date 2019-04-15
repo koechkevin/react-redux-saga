@@ -77,9 +77,10 @@
   font-size: 14px;
   font-family: "DIN Pro";
   border-collapse: collapse;
-  width: 80%;
+  width: 72%;
+  min-width: 600px;
   position: absolute;
-  left: 15em;
+  left: 27%;
   top: 5em;
   .right {
     margin-right: .7em;
@@ -140,10 +141,10 @@
   }
 }
 .page-header {
-  width: 80vw;
+  width: 70%;
   text-align: left;
   position: absolute;
-  left: 10%;
+  left: 27%;
   top: 8em;
   button {
     border: none;
@@ -219,7 +220,8 @@
   .new-staff {
     position: inherit;
     left: .10% !important;
-    width: 100vw !important;
+    width: 100vw;
+    min-width: 600px;
     .staff-details {
       display: block !important;
       width: 100% !important;
@@ -229,9 +231,9 @@
 
 .first-header {
   position: absolute;
-  left: 15em;
+  left: 27%;
   top: 5em;
-  width: 80%;
+  width: 72%;
   z-index: 1;
   .page-title {
     text-transform: uppercase;
@@ -251,8 +253,8 @@
 .new-staff {
   position: absolute;
   top: 10em;
-  left: 10%;
-  width: 80vw;
+  left: 27%;
+  width: 70%;
   min-height: max-content;
   border: 1px solid rgba(243, 242, 243, 1);;
   background-color: white;
@@ -509,3 +511,138 @@ div.Dropdown {
     }
   }
 }
+.left-nav {
+  width: 25%;
+  background-color: white;
+  position: fixed;
+  left: 0;
+  top: 4em;
+  height: 100vh;
+  min-width: 130px;
+  border-right: 1px solid #fcfcfc;
+  overflow-y: scroll;
+  list-style-type: none;
+  padding: 1em 2em 1em 1em;
+  a {
+    color: blue;
+  }
+  ul {
+    font-size: larger;
+    text-align: left;
+    text-transform: uppercase;
+  }
+}
+.children {
+  display: flex;
+}
+
+
+/* The Modal (background) */
+.mod {
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  min-height: 100vh; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /* The Close Button */
+  .close {
+    color: lightgrey;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    display: block;
+    background-color: #fefefe;
+    border: none;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 60%; /* Could be more or less, depending on screen size */
+}
+.new-student {
+  .form::before {
+    content: "* Required";
+    font-size: smaller;
+    color: red;
+    float: right;
+  }
+  input {
+    border: 1px solid blue !important;
+    height: 2em !important;
+    font-size: small !important;
+
+    &:focus {
+      box-shadow: none !important;
+      background-color: #fcfcfc;
+    }
+    &[type=text] {
+      margin-top: 1em;
+      text-transform: capitalize;
+    }
+    &[type=number] {
+      margin-top: 1em;
+      text-transform: capitalize;
+    }
+    &[type=submit] {
+      background-color: blue !important;
+      color: #fcfcfc;
+      max-width: max-content;
+      padding: .6em !important;
+      height: 2.5em !important;
+      text-transform: uppercase;
+      border-radius: 5px;
+      outline: none;
+      cursor: pointer;
+    }
+  }
+  .row{
+    display:flex;
+  }
+  .column {
+    flex: 50%;
+    margin: 0;
+    padding: 1em;
+    span::before {
+      content:"*";
+      color: red;
+      position: relative;
+      top: 1em;
+      left: -50%
+    }
+  }
+  form {
+    padding-bottom: 2em;
+  }
+  form:before {
+    content: "New Student";
+    font-weight: bold;
+    font-size: large;
+  }
+  @media screen and (max-width: 800px) {
+    .row{
+      display:block;
+    }
+    .column {
+      flex: 100%;
+      padding: 0;
+    }
+  }
+}
+

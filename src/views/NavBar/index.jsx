@@ -61,7 +61,9 @@ class NavBar extends Component {
         <span ref={this.setRef}>
           <MenuOptions logout={logout} status={status} />
         </span>
-        {children}
+        <div className="children">
+          {children}
+        </div>
       </div>
     );
   }

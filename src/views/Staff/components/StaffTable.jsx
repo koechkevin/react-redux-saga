@@ -49,10 +49,9 @@ const TableBody = ({ staff, handleShuffle, deleteStaff, match, location }) => {
   );
 };
 
-class Paginate extends Component {
+export class Paginate extends Component {
   static propTypes = {
-    pagination: PropTypes.object.isRequired,
-    fetchAllStaff: PropTypes.func.isRequired
+    pagination: PropTypes.object.isRequired
   };
   onPageChange = (e) => {
     const { pagination: { currentPage }, fetchAllStaff } = this.props;
@@ -60,13 +59,13 @@ class Paginate extends Component {
     fetchAllStaff(`?page=${e.target.name === 'previous'?currentPage-1:currentPage+1}`);
   };
   render() {
-    const { pagination: { currentPage, pageCount }} = this.props;
+    const { pagination: { currentPage, pageCount }, changePage } = this.props;
     return (
       <div className="paginate">
         <button
           type="button" name="previous"
           className={!currentPage || currentPage === 1?'inactive':''}
-          onClick={this.onPageChange}>
+          onClick={changePage||this.onPageChange}>
           Previous
         </button>
         <span className="current-page">
@@ -75,7 +74,7 @@ class Paginate extends Component {
         <button
           name="next"
           className={!currentPage || currentPage >= pageCount?'inactive':''}
-          type="button" onClick={this.onPageChange}>
+          type="button" onClick={changePage||this.onPageChange}>
           Next
         </button>
       </div>

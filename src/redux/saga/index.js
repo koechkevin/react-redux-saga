@@ -8,6 +8,7 @@ import {
   watchShuffle,
   watchUpdateStaffSaga
 } from './staffSaga';
+import {watchCreateStudent, watchFetchStudents} from './studentSaga';
 
 export const baseUrl = 'http://localhost:5000/api/v1';
 function* saga() {
@@ -18,7 +19,9 @@ function* saga() {
     watchCreateSaga(),
     watchUpdateStaffSaga(),
     watchFetchRoles(),
-    watchDeleteStaff()
+    watchDeleteStaff(),
+    watchFetchStudents(),
+    watchCreateStudent()
   ]);
 }
 

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Home from '../views/Home';
 import NavBar from '../views/NavBar';
+import LeftNav from '../views/NavBar/LeftNav';
 
 const HigherOrderComponent = ({Container, allowedRoles }) => {
   class higherComponent extends Component {
@@ -19,14 +20,15 @@ const HigherOrderComponent = ({Container, allowedRoles }) => {
       const { isLoggedIn, roles, location, match } = this.props;
       return(
         <div>
-          <NavBar location={location}>
-            {
-              isLoggedIn && roles.some(e => e.includes(allowedRoles)) ? (
+          {
+            isLoggedIn && roles.some(e => allowedRoles.includes(e)) ? (
+              <NavBar location={location}>
+                <LeftNav />
                 <Container
                   location={location} match={match} />
-              ): <Home />
-            }
-          </NavBar>
+              </NavBar>
+            ): <Home />
+          }
         </div>
       );
     }

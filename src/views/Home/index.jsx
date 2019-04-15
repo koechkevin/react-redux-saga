@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import '../../main.scss';
 import localStorage from 'local-storage';
 import {login} from '../../redux/actions/loginActions';
+import LeftNav from '../NavBar/LeftNav';
+import NavBar from '../NavBar';
 
 export const Login = ({errors, onSubmit, onChange}) => {
   let error = [];
@@ -55,9 +57,7 @@ class Home extends Component {
     action(this.state);
   };
   home = () => (
-    <div>
-      This is a home page
-    </div>
+    <div />
   );
   render() {
     const { login: { errors, isLoggedIn: logged } } = this.props;
@@ -65,7 +65,14 @@ class Home extends Component {
     return(
       <div>
         {
-          isLoggedIn? this.home(): Login({errors, onSubmit: this.onSubmit, onChange: this.onChange})
+          isLoggedIn?
+            (
+              <NavBar>
+                <LeftNav />
+                {this.home()}
+              </NavBar>
+            )
+            : Login({errors, onSubmit: this.onSubmit, onChange: this.onChange})
         }
       </div>
     );
