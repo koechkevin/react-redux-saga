@@ -6,7 +6,7 @@ import Table from './component/studentTable';
 import {createStudent, fetchAllStudents} from '../../redux/actions/studentsActions';
 import {history} from '../App';
 import Modal from './component/Modal';
-import NewStudent from "./component/NewStudent";
+import NewStudent from './component/NewStudent';
 
 class Students extends Component {
   static propTypes = {
@@ -14,6 +14,7 @@ class Students extends Component {
     fetchAllStudents: PropTypes.func.isRequired,
     location: PropTypes.object.isRequired,
     createStudent: PropTypes.func.isRequired,
+    errors: PropTypes.array.isRequired
   };
 
   state = {
@@ -24,9 +25,9 @@ class Students extends Component {
     fetchAllStudents(search);
   }
   content = () => {
-    const { createStudent } = this.props;
+    const { createStudent, errors } = this.props;
     return (
-      <NewStudent createStudent={createStudent} />
+      <NewStudent errors={errors} createStudent={createStudent} />
     );
   };
   onPageChange = (e) => {
@@ -49,7 +50,7 @@ class Students extends Component {
   }
 }
 
-const mapStateToProps = ({ students: { data }}) => ({
-  data
+const mapStateToProps = ({ students: { data, errors }}) => ({
+  data, errors
 });
 export default connect(mapStateToProps, { fetchAllStudents, createStudent })(Students);

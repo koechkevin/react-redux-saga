@@ -10,3 +10,8 @@ export const createStudent = (data, success) => ({
   type: 'CREATE_STUDENT',
   data, success
 });
+
+export const createStudentFailure = (errors) => ({
+  type: 'CREATE_STUDENT_FAIL',
+  errors
+});

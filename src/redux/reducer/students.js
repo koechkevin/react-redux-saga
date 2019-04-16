@@ -6,7 +6,8 @@ const initialState = {
       pageCount: 2,
       currentPage: 1
     }
-  }
+  },
+  errors: []
 };
 
 export default (state=initialState, action) => {
@@ -16,6 +17,10 @@ export default (state=initialState, action) => {
   case 'FETCH_ALL_STUDENTS_SUCCESS':
     return {
       ...state, data: action.data
+    };
+  case 'CREATE_STUDENT_FAIL':
+    return {
+      ...state, errors: action.errors
     };
   default:
     return state;

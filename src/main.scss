@@ -584,10 +584,12 @@ div.Dropdown {
     float: right;
   }
   input {
-    border: 1px solid blue !important;
+    border: 1px solid lightgrey !important;
     height: 2em !important;
     font-size: small !important;
-
+    &.input-error {
+      border: 1px solid red !important;
+    }
     &:focus {
       box-shadow: none !important;
       background-color: #fcfcfc;
@@ -595,10 +597,12 @@ div.Dropdown {
     &[type=text] {
       margin-top: 1em;
       text-transform: capitalize;
+      border-radius: 2px;
     }
     &[type=number] {
       margin-top: 1em;
       text-transform: capitalize;
+      border-radius: 2px;
     }
     &[type=submit] {
       background-color: blue !important;
@@ -610,6 +614,10 @@ div.Dropdown {
       border-radius: 5px;
       outline: none;
       cursor: pointer;
+      &.inactive {
+      background-color: #cccccc !important;
+      pointer-events: none;
+    }
     }
   }
   .row{
@@ -625,6 +633,15 @@ div.Dropdown {
       position: relative;
       top: 1em;
       left: -50%
+    }
+    span::after {
+      content: attr(errors);
+      color: red;
+      font-size: smaller;
+      width: 100%;
+      text-align: left;
+      display: block;
+      margin-top: -12px;
     }
   }
   form {
@@ -646,3 +663,44 @@ div.Dropdown {
   }
 }
 
+#toast-container {
+  top: auto !important;
+  right: auto !important;
+  width: 35%;
+  min-width: 200px;
+  left:32.5%;
+  position: relative;
+}
+div.toast.toast-error {
+  background-color: red;
+  position: relative;
+  button.toast-close-button {
+    border: none;
+    background-color: red;
+    position: absolute;
+    right: 7px;
+    float: right;
+    top: 7px;
+    padding: 2px;
+    cursor: pointer;
+  }
+}
+div.toast.toast-success {
+  background-color: limegreen;
+  color: #282c34;
+  position: relative;
+  button.toast-close-button {
+    border: none;
+    background-color: limegreen;
+    position: absolute;
+    right: 7px;
+    padding: 2px;
+    top: 7px;
+    cursor: pointer;
+  }
+}
+
+div.toast-message {
+  position: absolute;
+  left: 7px;
+}
