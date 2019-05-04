@@ -17,6 +17,7 @@ export function* fetchAllStudentsSaga(action) {
     const api = (url) => axios.get(`${baseUrl}/students${url}`);
     const response = yield call(api, action.url);
     yield put(fetchAllStudentSuccess(response.data));
+    console.log(response.data);
   } catch(error) {
     const {errors, errorMessage, status} = errorHandler(error);
     if (status === 401) {

@@ -34,7 +34,7 @@ const TableRow = ({ id, name, level, stream }) => (
     <tr
       className="row">
       <td className="mdl-data-table__cell--non-numeric table__data">
-        {id}
+        <a href={`/students/${id}`}>{id}</a>
       </td>
       <td className="mdl-data-table__cell--non-numeric table__data">
         {name}

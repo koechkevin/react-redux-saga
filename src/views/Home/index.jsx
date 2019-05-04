@@ -6,6 +6,7 @@ import localStorage from 'local-storage';
 import {login} from '../../redux/actions/loginActions';
 import LeftNav from '../NavBar/LeftNav';
 import NavBar from '../NavBar';
+import PageHeader from "../Staff/components/PageHeader";
 
 export const Login = ({errors, onSubmit, onChange}) => {
   let error = [];
@@ -57,7 +58,15 @@ class Home extends Component {
     action(this.state);
   };
   home = () => (
-    <div />
+    <div className="home">
+      <PageHeader
+        buttonValue="NEW STUDENT"
+        displayButton={false}
+        onClick={() => {}} heading="Home" />
+      <div className="student-card">
+        <div />
+      </div>
+    </div>
   );
   render() {
     const { login: { errors, isLoggedIn: logged } } = this.props;
