@@ -734,3 +734,7 @@ div.toast-message {
   padding: 2px 4px 2px 4px;
   border: 1px solid blue;
 }
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+}

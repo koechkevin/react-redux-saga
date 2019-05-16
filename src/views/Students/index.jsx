@@ -31,9 +31,9 @@ class Students extends Component {
     );
   };
   onPageChange = (e) => {
-    const { data: {pagination: { currentPage }}, fetchAllStudents } = this.props;
-    history.push(`/students?page=${e.target.name === 'previous'?currentPage-1:currentPage+1}`);
-    fetchAllStudents(`?page=${e.target.name === 'previous'?currentPage-1:currentPage+1}`);
+    const {fetchAllStudents } = this.props;
+    history.push(`/students?page=${e.target.value}`);
+    fetchAllStudents(`?page=${e.target.value}`);
   };
   render() {
     const { data: { students, pagination }} = this.props;

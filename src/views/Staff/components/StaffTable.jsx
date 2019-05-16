@@ -54,29 +54,85 @@ export class Paginate extends Component {
     pagination: PropTypes.object.isRequired
   };
   onPageChange = (e) => {
-    const { pagination: { currentPage }, fetchAllStaff } = this.props;
-    history.push(`/staff?page=${e.target.name === 'previous'?currentPage-1:currentPage+1}`);
-    fetchAllStaff(`?page=${e.target.name === 'previous'?currentPage-1:currentPage+1}`);
+    // eslint-disable-next-line react/prop-types
+    const { fetchAllStaff } = this.props;
+    history.push(`/staff?page=${e.target.value}`);
+    fetchAllStaff(`?page=${e.target.value}`);
+  };
+  renderPages = (pageCount, currentPage) => {
+    let output = [];
+    for(let i =1; i<=pageCount; i++){
+      if(i===1||i===currentPage||i===currentPage-1||i===currentPage+1||i===pageCount) {
+        output.push(i);
+      }
+    }
+    if(output.length >= 3 && output[1] - output[0]>1) output.splice(1,0,'..');
+    if(output.length>=3 && output[output.length-1] - output[output.length-2]>1) output.splice(output.length-1,0,'...');
+    return output;
   };
   render() {
     const { pagination: { currentPage, pageCount }, changePage } = this.props;
     return (
-      <div className="paginate">
+      <div className="paginate pagination">
         <button
-          type="button" name="previous"
+          onClick={changePage||this.onPageChange}
+          value={1}
           className={!currentPage || currentPage === 1?'inactive':''}
-          onClick={changePage||this.onPageChange}>
+          type="button">
+          &laquo;
+        </button>
+        <button
+          onClick={changePage||this.onPageChange}
+          value={currentPage-1}
+          className={!currentPage || currentPage === 1?'inactive':''}
+          type="button">
           Previous
         </button>
-        <span className="current-page">
-          {`${currentPage} of ${pageCount}`}
-        </span>
+        {
+          this.renderPages(pageCount, currentPage).map((e) => {
+            return (
+              <button
+                className={!currentPage || currentPage === e || e === '...' || e==='..'?'inactive':''}
+                onClick={changePage||this.onPageChange}
+                value={e === '..'?'...':e}
+                type="button"
+                key={e}
+              >
+                {e === '..'?'...':e}
+              </button>
+            );
+          })
+        }
         <button
-          name="next"
-          className={!currentPage || currentPage >= pageCount?'inactive':''}
-          type="button" onClick={changePage||this.onPageChange}>
-          Next
+          onClick={changePage||this.onPageChange}
+          value={currentPage+1}
+          className={!currentPage || currentPage === pageCount?'inactive':''}
+          type="button">
+         Next
         </button>
+        <button
+          onClick={changePage||this.onPageChange}
+          value={pageCount}
+          className={!currentPage || currentPage === pageCount?'inactive':''}
+          type="button">
+          &raquo;
+        </button>
+
+        {/*<button*/}
+        {/*  type="button" name="previous"*/}
+        {/*  className={!currentPage || currentPage === 1?'inactive':''}*/}
+        {/*  onClick={changePage||this.onPageChange}>*/}
+        {/*  Previous*/}
+        {/*</button>*/}
+        {/*<span className="current-page">*/}
+        {/*  {`${currentPage} of ${pageCount}`}*/}
+        {/*</span>*/}
+        {/*<button*/}
+        {/*  name="next"*/}
+        {/*  className={!currentPage || currentPage >= pageCount?'inactive':''}*/}
+        {/*  type="button" onClick={changePage||this.onPageChange}>*/}
+        {/*  Next*/}
+        {/*</button>*/}
       </div>
     );
   }
