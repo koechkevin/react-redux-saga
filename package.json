@@ -11,7 +11,7 @@
     "eslint-plugin-react": "^7.12.4",
     "history": "^4.9.0",
     "local-storage": "^1.4.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
